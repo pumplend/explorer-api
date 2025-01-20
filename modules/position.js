@@ -20,7 +20,7 @@ const positionSearch = async (req) =>
     
         if(query?.userBorrowData)
         {
-            rules['userBorrowData'] = String(query.userBorrowData)
+            rules['id'] = String(query.userBorrowData)
         }
     
         if(query?.hash)
@@ -30,7 +30,7 @@ const positionSearch = async (req) =>
     
         if(query?.deadline)
         {
-            rules['deadline'] = { $gt: Number(deadline) }
+            rules['deadline'] = { $gt: Number(query.deadline) }
         }
         return await db.getOrdersByRules(
             rules,
@@ -40,6 +40,7 @@ const positionSearch = async (req) =>
         )
     }catch(e)
     {
+        console.log(e)
         return false;
     }
 
@@ -67,7 +68,7 @@ const liquidationSearch = async (req) =>
         
             if(query?.userBorrowData)
             {
-                rules['userBorrowData'] = String(query.userBorrowData)
+                rules['id'] = String(query.userBorrowData)
             }
         
             return await db.getOrdersByRules(

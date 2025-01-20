@@ -47,7 +47,7 @@ app.get('/explorer/positions', async function(req, res) {
     const ret = await modules.position.positionSearch(req)
     if(!ret)
     {
-        sendErr(res,"Unknown Server Side Error")
+        return sendErr(res,"Unknown Server Side Error")
     }
     res.status(200).send({
         "code": 200,
@@ -59,7 +59,7 @@ app.get('/explorer/actives', async function(req, res) {
     const ret = await modules.active.activeSearch(req)
     if(!ret)
     {
-        sendErr(res,"Unknown Server Side Error")
+        return sendErr(res,"Unknown Server Side Error")
     }
     res.status(200).send({
         "code": 200,
@@ -71,7 +71,7 @@ app.get('/explorer/liquidations', async function(req, res) {
     const ret = await modules.position.liquidationSearch(req)
     if(!ret)
     {
-        sendErr(res,"Unknown Server Side Error")
+        return sendErr(res,"Unknown Server Side Error")
     }
     res.status(200).send({
         "code": 200,

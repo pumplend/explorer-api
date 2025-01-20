@@ -20,7 +20,7 @@ const activeSearch = async (req) =>
     
         if(query?.userBorrowData)
         {
-            rules['userBorrowData'] = String(query.userBorrowData)
+            rules['id'] = String(query.userBorrowData)
         }
     
         if(query?.hash)
