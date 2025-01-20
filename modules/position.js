@@ -53,7 +53,7 @@ const liquidationSearch = async (req) =>
             let pageSize =  Number(query?.pageSize)>0? Number(query.pageSize) :1;
             let deadline = query?.deadline ? Number(query.deadline) : Math.floor(Date.now()/1000);
             let rules = {
-                deadline: { $gt: deadline }
+                deadline: { $lt: deadline }
             }
             if(query?.user)
             {
