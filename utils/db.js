@@ -46,6 +46,7 @@ async function getOrdersByRules(rules,page = 1 , pageSize = 1) {
 async function getActionHistoryByRules(rules, page = 1 , pageSize = 1) {
     const db = await connect()
     var ret = await db.db.collection(sActionHistory).find(rules)
+    .sort({ blockTime: -1 })
     .skip((page - 1) * pageSize)
     .limit(pageSize)
     .project({_id:0}).toArray();
