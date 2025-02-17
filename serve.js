@@ -78,3 +78,15 @@ app.get('/explorer/liquidations', async function(req, res) {
         "data": ret
     })
 })
+
+app.get('/explorer', async function(req, res) {
+    const ret = await modules.main.mainPage(req)
+    if(!ret)
+    {
+        return sendErr(res,"Unknown Server Side Error")
+    }
+    res.status(200).send({
+        "code": 200,
+        "data": ret
+    })
+})

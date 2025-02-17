@@ -54,8 +54,24 @@ async function getActionHistoryByRules(rules, page = 1 , pageSize = 1) {
     return ret;
 }
 
+async function countMainPage() {
+    const db = await connect()
+    const activeCount = await db.db.collection(sActionHistory).countDocuments();
+    const closedPositionCount = await db.db.collection(sActionHistory).countDocuments({
+        type: { $in: ['liquidatePump', 'liquidateRaydium', 'repay'] }
+    });
+    const activePositionCounts = await db.db.collection(sOrder).countDocuments();
+    await db.close();
+    return {
+        activeCount,
+        activePositionCounts,
+        closedPositionCount
+    };
+}
+
 module.exports = {
     getOrderByDeadline,
     getActionHistoryByRules,
-    getOrdersByRules
+    getOrdersByRules,
+    countMainPage
 }
